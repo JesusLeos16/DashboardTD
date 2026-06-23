@@ -6,855 +6,676 @@
   <title>Toma de Decisiones</title>
   <style>
     :root {
-      --green:      #177a30;
-      --green-bg:   #eef6f0;
-      --black:      #111111;
-      --gray-1:     #444444;
-      --gray-2:     #888888;
-      --gray-3:     #cccccc;
-      --gray-4:     #e8e8e8;
-      --gray-5:     #f4f4f2;
-      --white:      #ffffff;
-      --sidebar-w:  220px;
+      --green:     #177a30;
+      --green-l:   #22a845;
+      --green-bg:  #eef6f0;
+      --black:     #111111;
+      --g1:        #444444;
+      --g2:        #888888;
+      --g3:        #cccccc;
+      --g4:        #e8e8e8;
+      --g5:        #f4f4f2;
+      --white:     #ffffff;
+      --amber:     #b45309;
+      --amber-bg:  #fef9ec;
+      --sw:        220px;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     html, body { height: 100%; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--g5); color: var(--black); font-size: 14px; line-height: 1.6; display: flex; }
 
-    body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      background: var(--gray-5);
-      color: var(--black);
-      font-size: 14px;
-      line-height: 1.6;
-      display: flex;
-    }
+    /* SIDEBAR */
+    .sidebar { width: var(--sw); flex-shrink: 0; background: var(--white); border-right: 1px solid var(--g4); height: 100vh; position: sticky; top: 0; display: flex; flex-direction: column; padding: 1.75rem 1.25rem; overflow-y: auto; }
+    .sb-brand { display: flex; align-items: center; gap: .55rem; font-weight: 800; font-size: .82rem; letter-spacing: -.01em; margin-bottom: 1.5rem; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+    .sb-label { font-size: .6rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--g3); margin-bottom: .45rem; padding-left: .2rem; }
+    .sb-sec { margin-bottom: 1.25rem; }
+    .sb-link { display: flex; align-items: center; gap: .55rem; padding: .4rem .6rem; border-radius: 6px; font-size: .8rem; font-weight: 500; color: var(--g1); text-decoration: none; transition: background .12s; margin-bottom: .1rem; }
+    .sb-link:hover { background: var(--g5); color: var(--black); }
+    .sb-ico { width: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .sb-nav { display: block; padding: .38rem .6rem; border-radius: 6px; font-size: .8rem; color: var(--g2); text-decoration: none; transition: background .12s; margin-bottom: .08rem; }
+    .sb-nav:hover { background: var(--g5); color: var(--black); }
+    hr.sb-div { border: none; border-top: 1px solid var(--g4); margin: .6rem 0; }
+    .sb-spacer { flex: 1; }
+    .sb-meta { font-size: .68rem; color: var(--g3); line-height: 1.5; }
+    .user-wrap { margin-bottom: 1.1rem; }
+    .user-input { width: 100%; padding: .38rem .6rem; border: 1px solid var(--g4); border-radius: 6px; font-family: inherit; font-size: .78rem; background: var(--g5); outline: none; margin-top: .3rem; }
+    .user-input:focus { border-color: var(--green); background: var(--white); }
 
-    /* ═══════════════════════════════════════════
-       SIDEBAR
-    ═══════════════════════════════════════════ */
-    .sidebar {
-      width: var(--sidebar-w);
-      flex-shrink: 0;
-      background: var(--white);
-      border-right: 1px solid var(--gray-4);
-      height: 100vh;
-      position: sticky;
-      top: 0;
-      display: flex;
-      flex-direction: column;
-      padding: 1.75rem 1.25rem;
-      overflow-y: auto;
-    }
+    /* MAIN */
+    .main { flex: 1; min-width: 0; overflow-y: auto; padding: 2rem 2.5rem 4rem; }
 
-    .sidebar-brand {
-      display: flex;
-      align-items: center;
-      gap: 0.55rem;
-      font-weight: 800;
-      font-size: 0.82rem;
-      letter-spacing: -0.01em;
-      color: var(--black);
-      margin-bottom: 2rem;
-    }
+    /* PAGE HEADER */
+    .pg-head { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--g4); display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .eyebrow { font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--green); margin-bottom: .4rem; }
+    .pg-head h1 { font-size: clamp(1.6rem, 2.5vw, 2.2rem); font-weight: 800; letter-spacing: -.03em; line-height: 1.1; }
+    .pg-head p { font-size: .82rem; color: var(--g2); margin-top: .35rem; }
+    .hd-badges { display: flex; gap: .5rem; flex-shrink: 0; }
+    .badge-a { display: inline-flex; align-items: center; gap: .4rem; padding: .4rem .9rem; border: 1px solid var(--g4); border-radius: 6px; font-size: .75rem; font-weight: 600; color: var(--g1); text-decoration: none; background: var(--white); transition: border-color .15s, color .15s; white-space: nowrap; line-height: 1; }
+    .badge-a:hover { border-color: var(--green); color: var(--green); }
 
-    .brand-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--green);
-      flex-shrink: 0;
-    }
+    /* SECTIONS */
+    .sec { margin-bottom: 2.5rem; }
+    .sec-title { font-size: .65rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--g3); margin-bottom: .9rem; display: flex; align-items: center; gap: .75rem; }
+    .sec-title::after { content: ''; flex: 1; height: 1px; background: var(--g4); }
 
-    .sidebar-section {
-      margin-bottom: 1.75rem;
-    }
+    /* SUBTEMAS */
+    .sub-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--g4); border: 1px solid var(--g4); border-radius: 8px; overflow: hidden; }
+    .sub-card { background: var(--white); padding: 1.5rem; }
+    .sub-num { font-size: .6rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--green); margin-bottom: .5rem; }
+    .sub-h { font-size: .92rem; font-weight: 600; line-height: 1.4; }
+    .sub-list { margin-top: .9rem; list-style: none; }
+    .sub-list li { font-size: .8rem; color: var(--g1); padding: .3rem 0; border-top: 1px solid var(--g4); display: flex; gap: .55rem; }
+    .sub-list li::before { content: '›'; color: var(--green); font-weight: 700; flex-shrink: 0; }
 
-    .sidebar-label {
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--gray-3);
-      margin-bottom: 0.5rem;
-      padding-left: 0.25rem;
-    }
+    /* ANNOUNCEMENTS */
+    .ann-box { background: var(--white); border: 1px solid var(--g4); border-radius: 8px; overflow: hidden; }
+    .ann-head { padding: .7rem 1.25rem; border-bottom: 1px solid var(--g4); }
+    .ann-head-label { font-size: .65rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--g2); }
+    .ann-list { max-height: 180px; overflow-y: auto; }
+    .ann-empty { padding: .9rem 1.25rem; font-size: .78rem; color: var(--g3); }
+    .ann-item { padding: .6rem 1.25rem; border-bottom: 1px solid var(--g4); display: flex; gap: .75rem; align-items: baseline; }
+    .ann-item:last-child { border-bottom: none; }
+    .ann-author { font-size: .72rem; font-weight: 700; color: var(--green); flex-shrink: 0; }
+    .ann-text { font-size: .78rem; color: var(--g1); flex: 1; }
+    .ann-time { font-size: .65rem; color: var(--g3); flex-shrink: 0; }
+    .ann-form { padding: .7rem 1.25rem; border-top: 1px solid var(--g4); display: flex; gap: .5rem; }
+    .ann-inp { flex: 1; padding: .38rem .6rem; border: 1px solid var(--g4); border-radius: 6px; font-family: inherit; font-size: .78rem; outline: none; }
+    .ann-inp:focus { border-color: var(--green); }
+    .ann-btn { padding: .38rem .85rem; background: var(--green); color: var(--white); border: none; border-radius: 6px; font-size: .75rem; font-weight: 600; cursor: pointer; font-family: inherit; transition: background .15s; }
+    .ann-btn:hover { background: var(--green-l); }
 
-    .sidebar-link {
-      display: flex;
-      align-items: center;
-      gap: 0.55rem;
-      padding: 0.45rem 0.6rem;
-      border-radius: 6px;
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--gray-1);
-      text-decoration: none;
-      transition: background 0.12s, color 0.12s;
-      margin-bottom: 0.15rem;
-    }
+    /* EQUIPO CARD */
+    .eq-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; align-items: start; }
+    .eq-card { background: var(--white); border: 1px solid var(--g4); border-radius: 8px; overflow: hidden; }
+    .eq-head { padding: 1rem 1.25rem .9rem; border-bottom: 1px solid var(--g4); }
+    .eq-head-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: .6rem; }
+    .eq-name { font-size: .9rem; font-weight: 700; letter-spacing: -.01em; }
+    .status-btn { font-size: .63rem; font-weight: 600; padding: .16rem .5rem; border-radius: 999px; cursor: pointer; border: 1px solid var(--g4); font-family: inherit; background: var(--g5); color: var(--g2); transition: .15s; }
+    .status-btn.en_progreso { background: var(--amber-bg); color: var(--amber); border-color: #fde68a; }
+    .status-btn.listo { background: var(--green-bg); color: var(--green); border-color: #bbf7d0; }
+    .members { display: flex; flex-wrap: wrap; gap: .25rem; }
+    .member { font-size: .7rem; font-weight: 500; color: var(--g1); background: var(--g5); border: 1px solid var(--g4); padding: .1rem .42rem; border-radius: 4px; }
 
-    .sidebar-link:hover {
-      background: var(--gray-5);
-      color: var(--black);
-    }
+    /* TABS */
+    .eq-tabs { display: flex; border-bottom: 1px solid var(--g4); padding: 0 .25rem; }
+    .tab-btn { padding: .5rem .8rem; font-family: inherit; font-size: .72rem; font-weight: 500; color: var(--g2); background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; margin-bottom: -1px; transition: color .15s; }
+    .tab-btn:hover { color: var(--black); }
+    .tab-btn.active { color: var(--green); border-bottom-color: var(--green); font-weight: 600; }
 
-    .sidebar-link.active {
-      background: var(--green-bg);
-      color: var(--green);
-      font-weight: 600;
-    }
+    /* PANEL */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: flex; flex-direction: column; }
+    .panel-body { height: 280px; overflow-y: auto; padding: .9rem 1.25rem; }
+    .panel-foot { padding: .7rem 1.25rem; border-top: 1px solid var(--g4); flex-shrink: 0; }
 
-    .sidebar-link-icon {
-      width: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .sidebar-divider {
-      border: none;
-      border-top: 1px solid var(--gray-4);
-      margin: 0.75rem 0;
-    }
-
-    .sidebar-nav-item {
-      display: block;
-      padding: 0.4rem 0.6rem;
-      border-radius: 6px;
-      font-size: 0.8rem;
-      color: var(--gray-2);
-      text-decoration: none;
-      transition: background 0.12s, color 0.12s;
-      margin-bottom: 0.1rem;
-    }
-
-    .sidebar-nav-item:hover {
-      background: var(--gray-5);
-      color: var(--black);
-    }
-
-    .sidebar-spacer { flex: 1; }
-
-    .sidebar-meta {
-      font-size: 0.68rem;
-      color: var(--gray-3);
-      padding: 0.25rem;
-      line-height: 1.5;
-    }
-
-    /* ═══════════════════════════════════════════
-       MAIN
-    ═══════════════════════════════════════════ */
-    .main {
-      flex: 1;
-      min-width: 0;
-      overflow-y: auto;
-      padding: 2rem 2.5rem 4rem;
-    }
-
-    /* ── PAGE HEADER ─────────────────────────── */
-    .page-header {
-      margin-bottom: 2rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid var(--gray-4);
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .page-eyebrow {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--green);
-      margin-bottom: 0.4rem;
-    }
-
-    .page-header h1 {
-      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 1.1;
-    }
-
-    .page-header p {
-      font-size: 0.82rem;
-      color: var(--gray-2);
-      margin-top: 0.35rem;
-    }
-
-    .header-badges {
-      display: flex;
-      gap: 0.5rem;
-      flex-shrink: 0;
-    }
-
-    .badge-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.4rem 0.9rem;
-      border: 1px solid var(--gray-4);
-      border-radius: 6px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--gray-1);
-      text-decoration: none;
-      background: var(--white);
-      transition: border-color 0.15s, color 0.15s;
-      white-space: nowrap;
-      line-height: 1;
-    }
-
-    .badge-link:hover {
-      border-color: var(--green);
-      color: var(--green);
-    }
-
-    /* ── SECTION ─────────────────────────────── */
-    .sec {
-      margin-bottom: 2.5rem;
-    }
-
-    .sec-title {
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--gray-3);
-      margin-bottom: 0.9rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .sec-title::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--gray-4);
-    }
-
-    /* ── SUBTEMAS ────────────────────────────── */
-    .subtemas-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      background: var(--gray-4);
-      border: 1px solid var(--gray-4);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    .subtema-card {
-      background: var(--white);
-      padding: 1.5rem;
-    }
-
-    .subtema-num {
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--green);
-      margin-bottom: 0.5rem;
-    }
-
-    .subtema-heading {
-      font-size: 0.92rem;
-      font-weight: 600;
-      color: var(--black);
-      line-height: 1.4;
-    }
-
-    .subtema-items {
-      margin-top: 0.9rem;
-      list-style: none;
-    }
-
-    .subtema-items li {
-      font-size: 0.8rem;
-      color: var(--gray-1);
-      padding: 0.3rem 0;
-      border-top: 1px solid var(--gray-4);
-      display: flex;
-      gap: 0.55rem;
-    }
-
-    .subtema-items li::before {
-      content: '›';
-      color: var(--green);
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-
-    /* ── EQUIPOS ─────────────────────────────── */
-    .equipos-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-    }
-
-    .equipo-card {
-      background: var(--white);
-      border: 1px solid var(--gray-4);
-      border-radius: 8px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .equipo-head {
-      padding: 1.1rem 1.25rem 1rem;
-      border-bottom: 1px solid var(--gray-4);
-    }
-
-    .equipo-name {
-      font-size: 0.9rem;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      color: var(--black);
-      margin-bottom: 0.65rem;
-    }
-
-    .members {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.25rem;
-    }
-
-    .member {
-      font-size: 0.7rem;
-      font-weight: 500;
-      color: var(--gray-1);
-      background: var(--gray-5);
-      border: 1px solid var(--gray-4);
-      padding: 0.12rem 0.45rem;
-      border-radius: 4px;
-    }
-
-    .equipo-body {
-      padding: 1.1rem 1.25rem;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .tasks-label {
-      font-size: 0.58rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--gray-3);
-      margin-bottom: 0.5rem;
-    }
-
-    .task-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.55rem;
-      padding: 0.28rem 0;
-      border-bottom: 1px solid var(--gray-4);
-      font-size: 0.77rem;
-      color: var(--gray-1);
-      line-height: 1.4;
-    }
-
+    /* TASKS */
+    .tasks-lbl { font-size: .58rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--g3); margin-bottom: .45rem; }
+    .task-row { display: flex; align-items: flex-start; gap: .55rem; padding: .28rem 4px; border-bottom: 1px solid var(--g4); font-size: .77rem; color: var(--g1); line-height: 1.4; cursor: pointer; border-radius: 4px; transition: background .1s; user-select: none; }
+    .task-row:hover { background: var(--g5); }
     .task-row:last-of-type { border-bottom: none; }
+    .task-row.done .task-txt { text-decoration: line-through; color: var(--g3); }
+    .chk { width: 13px; height: 13px; border: 1.5px solid var(--g3); border-radius: 3px; flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; transition: .15s; }
+    .task-row.done .chk { background: var(--green); border-color: var(--green); }
+    .chk-svg { display: none; }
+    .task-row.done .chk-svg { display: block; }
+    .deliverables { margin-top: .85rem; padding: .65rem; background: var(--g5); border-radius: 6px; }
+    .del-lbl { font-size: .58rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--green); margin-bottom: .3rem; }
+    .del-list { list-style: none; }
+    .del-list li { font-size: .75rem; color: var(--g2); padding: .14rem 0; display: flex; align-items: center; gap: .45rem; }
+    .del-list li::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
 
-    .chk {
-      width: 12px;
-      height: 12px;
-      border: 1.5px solid var(--gray-3);
-      border-radius: 3px;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
+    /* FEED */
+    .feed-list { flex: 1; overflow-y: auto; padding: .75rem 1.25rem; display: flex; flex-direction: column; gap: .6rem; }
+    .feed-empty { color: var(--g3); font-size: .78rem; text-align: center; margin: auto; }
+    .feed-entry { display: flex; flex-direction: column; gap: .1rem; }
+    .feed-meta { display: flex; align-items: center; gap: .45rem; }
+    .feed-author { font-size: .7rem; font-weight: 700; color: var(--green); }
+    .feed-time { font-size: .64rem; color: var(--g3); }
+    .feed-txt { font-size: .78rem; color: var(--g1); line-height: 1.5; white-space: pre-wrap; word-break: break-word; }
+    .feed-form { padding: .7rem 1.25rem; border-top: 1px solid var(--g4); display: flex; gap: .5rem; flex-shrink: 0; }
+    .feed-inp { flex: 1; padding: .38rem .6rem; border: 1px solid var(--g4); border-radius: 6px; font-family: inherit; font-size: .78rem; resize: none; outline: none; }
+    .feed-inp:focus { border-color: var(--green); }
+    .feed-send { padding: .38rem .85rem; background: var(--green); color: var(--white); border: none; border-radius: 6px; font-size: .75rem; font-weight: 600; cursor: pointer; font-family: inherit; align-self: flex-end; transition: background .15s; }
+    .feed-send:hover { background: var(--green-l); }
 
-    .deliverables {
-      margin-top: auto;
-      padding-top: 0.85rem;
-    }
+    /* FILES */
+    .file-body { flex: 1; overflow-y: auto; padding: .75rem 1.25rem; }
+    .file-empty { color: var(--g3); font-size: .78rem; text-align: center; padding: 1.5rem 0; }
+    .file-item { display: flex; align-items: center; gap: .6rem; padding: .42rem 0; border-bottom: 1px solid var(--g4); font-size: .77rem; }
+    .file-item:last-child { border-bottom: none; }
+    .file-name { flex: 1; color: var(--g1); font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .file-open { color: var(--green); text-decoration: none; font-size: .7rem; font-weight: 600; flex-shrink: 0; }
+    .file-open:hover { text-decoration: underline; }
+    .icon-btn { background: none; border: none; cursor: pointer; color: var(--g3); display: flex; align-items: center; padding: 0; transition: color .15s; flex-shrink: 0; }
+    .icon-btn:hover { color: #dc2626; }
+    .upload-lbl { display: inline-flex; align-items: center; gap: .4rem; padding: .38rem .8rem; border: 1px dashed var(--g3); border-radius: 6px; font-size: .75rem; font-weight: 500; color: var(--g2); cursor: pointer; transition: .15s; }
+    .upload-lbl:hover { border-color: var(--green); color: var(--green); }
+    .prog-wrap { display: none; height: 3px; background: var(--g4); border-radius: 999px; overflow: hidden; margin-top: .5rem; }
+    .prog-bar { height: 100%; background: var(--green); width: 0%; transition: width .2s; }
 
-    .del-label {
-      font-size: 0.58rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--green);
-      margin-bottom: 0.35rem;
-    }
+    /* LINKS */
+    .lk-body { flex: 1; overflow-y: auto; padding: .75rem 1.25rem; display: flex; flex-direction: column; gap: .6rem; }
+    .lk-empty { color: var(--g3); font-size: .78rem; text-align: center; padding: 1.5rem 0; }
+    .lk-form { padding: .7rem 1.25rem; border-top: 1px solid var(--g4); display: flex; gap: .5rem; flex-shrink: 0; }
+    .lk-inp { flex: 1; padding: .38rem .6rem; border: 1px solid var(--g4); border-radius: 6px; font-family: inherit; font-size: .78rem; outline: none; }
+    .lk-inp:focus { border-color: var(--green); }
+    .lk-add { padding: .38rem .85rem; background: var(--green); color: var(--white); border: none; border-radius: 6px; font-size: .75rem; font-weight: 600; cursor: pointer; font-family: inherit; transition: background .15s; }
+    .lk-add:hover { background: var(--green-l); }
+    .lk-card { border: 1px solid var(--g4); border-radius: 7px; overflow: hidden; display: flex; background: var(--g5); }
+    .lk-thumb { width: 80px; flex-shrink: 0; background: var(--g4); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .lk-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .lk-info { flex: 1; padding: .55rem .7rem; min-width: 0; }
+    .lk-type { font-size: .58rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--g3); margin-bottom: .15rem; }
+    .lk-title { font-size: .78rem; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .lk-url { font-size: .66rem; color: var(--g3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block; text-decoration: none; }
+    .lk-url:hover { color: var(--green); }
+    .lk-del { padding: 0 .6rem; display: flex; align-items: center; background: none; border: none; cursor: pointer; color: var(--g3); transition: color .15s; }
+    .lk-del:hover { color: #dc2626; }
 
-    .del-list {
-      list-style: none;
-    }
+    /* TOPBAR mobile */
+    .topbar { display: none; position: sticky; top: 0; z-index: 20; background: var(--white); border-bottom: 1px solid var(--g4); padding: 0 1.25rem; height: 48px; align-items: center; justify-content: space-between; }
+    .tb-brand { display: flex; align-items: center; gap: .5rem; font-weight: 800; font-size: .82rem; }
+    .tb-links { display: flex; gap: .4rem; }
+    .tb-link { padding: .26rem .65rem; border: 1px solid var(--g4); border-radius: 5px; font-size: .72rem; font-weight: 500; color: var(--g1); text-decoration: none; }
+    .tb-link:hover { border-color: var(--green); color: var(--green); }
 
-    .del-list li {
-      font-size: 0.75rem;
-      color: var(--gray-2);
-      padding: 0.15rem 0;
-      display: flex;
-      align-items: center;
-      gap: 0.45rem;
-    }
-
-    .del-list li::before {
-      content: '';
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: var(--green);
-      flex-shrink: 0;
-    }
-
-    /* ── WORKSPACE ───────────────────────────── */
-    .workspace {
-      border-top: 1px solid var(--gray-4);
-      margin-top: 1rem;
-    }
-
-    .workspace-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.75rem 1.25rem 0.5rem;
-    }
-
-    .workspace-label {
-      font-size: 0.58rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--gray-3);
-    }
-
-    .workspace-status {
-      font-size: 0.65rem;
-      color: var(--gray-3);
-      transition: color 0.2s;
-    }
-
-    .workspace-status.saving { color: var(--gray-2); }
-    .workspace-status.saved  { color: var(--green); }
-
-    .workspace-textarea {
-      width: 100%;
-      min-height: 90px;
-      padding: 0.5rem 1.25rem 1rem;
-      border: none;
-      outline: none;
-      resize: none;
-      font-family: inherit;
-      font-size: 0.8rem;
-      line-height: 1.6;
-      color: var(--gray-1);
-      background: transparent;
-    }
-
-    .workspace-textarea::placeholder {
-      color: var(--gray-3);
-    }
-
-    /* ═══════════════════════════════════════════
-       TOPBAR (mobile / tablet only)
-    ═══════════════════════════════════════════ */
-    .topbar {
-      display: none;
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: var(--white);
-      border-bottom: 1px solid var(--gray-4);
-      padding: 0 1.25rem;
-      height: 48px;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .topbar-brand {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-weight: 800;
-      font-size: 0.82rem;
-    }
-
-    .topbar-links {
-      display: flex;
-      gap: 0.4rem;
-    }
-
-    .topbar-link {
-      padding: 0.28rem 0.65rem;
-      border: 1px solid var(--gray-4);
-      border-radius: 5px;
-      font-size: 0.72rem;
-      font-weight: 500;
-      color: var(--gray-1);
-      text-decoration: none;
-    }
-
-    .topbar-link:hover { border-color: var(--green); color: var(--green); }
-
-    /* ═══════════════════════════════════════════
-       RESPONSIVE
-    ═══════════════════════════════════════════ */
-
-    /* Tablet: ≤1024px */
+    /* RESPONSIVE */
     @media (max-width: 1024px) {
       body { display: block; }
-
       .sidebar { display: none; }
-
       .topbar { display: flex; }
-
-      .main {
-        padding: 1.5rem 1.5rem 3rem;
-      }
-
-      .equipos-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      .main { padding: 1.5rem 1.5rem 3rem; }
+      .eq-grid { grid-template-columns: repeat(2,1fr); }
     }
-
-    /* Mobile: ≤640px */
     @media (max-width: 640px) {
       .main { padding: 1.25rem 1rem 3rem; }
-
-      .subtemas-row {
-        grid-template-columns: 1fr;
-      }
-
-      .equipos-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .page-header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .header-badges {
-        flex-wrap: wrap;
-      }
+      .sub-row { grid-template-columns: 1fr; }
+      .eq-grid { grid-template-columns: 1fr; }
+      .pg-head { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
 
-  <!-- TOPBAR (tablet/mobile) -->
-  <div class="topbar">
-    <div class="topbar-brand">
-      <div class="brand-dot"></div>
-      Toma de Decisiones
+<!-- TOPBAR mobile -->
+<div class="topbar">
+  <div class="tb-brand"><div class="dot"></div> Toma de Decisiones</div>
+  <div class="tb-links">
+    <a class="tb-link" href="https://docs.google.com/document/d/1MDMz4Vmpypx5DTp5glB-oY9Dan8w9V1xw-XKpdJml2U/edit?usp=sharing" target="_blank">Docs</a>
+    <a class="tb-link" href="https://canva.link/8cvmkgsqj6mba2j" target="_blank">Canva</a>
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sb-brand"><div class="dot"></div> Toma de Decisiones</div>
+
+  <div class="sb-sec user-wrap">
+    <p class="sb-label">Tu nombre</p>
+    <input class="user-input" id="user-name" type="text" placeholder="Escribe tu nombre..." maxlength="30" />
+  </div>
+
+  <div class="sb-sec">
+    <p class="sb-label">Recursos</p>
+    <a class="sb-link" href="https://docs.google.com/document/d/1MDMz4Vmpypx5DTp5glB-oY9Dan8w9V1xw-XKpdJml2U/edit?usp=sharing" target="_blank">
+      <span class="sb-ico"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1.5H3.5a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V5l-3.5-3.5z"/><polyline points="8 1.5 8 5 11.5 5"/><line x1="4.5" y1="7.5" x2="9.5" y2="7.5"/><line x1="4.5" y1="9.5" x2="7.5" y2="9.5"/></svg></span>
+      Investigación
+    </a>
+    <a class="sb-link" href="https://canva.link/8cvmkgsqj6mba2j" target="_blank">
+      <span class="sb-ico"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="2" width="12" height="8" rx="1"/><line x1="7" y1="10" x2="7" y2="12.5"/><line x1="4.5" y1="12.5" x2="9.5" y2="12.5"/></svg></span>
+      Presentación
+    </a>
+  </div>
+
+  <hr class="sb-div" />
+
+  <div class="sb-sec">
+    <p class="sb-label">Ir a</p>
+    <a class="sb-nav" href="#anuncios">Anuncios</a>
+    <a class="sb-nav" href="#subtemas">Subtemas</a>
+    <a class="sb-nav" href="#investigacion">Investigación</a>
+    <a class="sb-nav" href="#diseno">Diseño</a>
+    <a class="sb-nav" href="#presentacion">Presentación</a>
+  </div>
+
+  <div class="sb-spacer"></div>
+  <div class="sb-meta">Clase Dinámica · 2026</div>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+
+  <div class="pg-head">
+    <div>
+      <p class="eyebrow">Clase dinámica · 2026</p>
+      <h1>Toma de Decisiones</h1>
+      <p>Organización, recursos y avances del equipo.</p>
     </div>
-    <div class="topbar-links">
-      <a class="topbar-link" href="https://docs.google.com/document/d/1MDMz4Vmpypx5DTp5glB-oY9Dan8w9V1xw-XKpdJml2U/edit?usp=sharing" target="_blank">Docs</a>
-      <a class="topbar-link" href="https://canva.link/8cvmkgsqj6mba2j" target="_blank">Canva</a>
+    <div class="hd-badges">
+      <a class="badge-a" href="https://docs.google.com/document/d/1MDMz4Vmpypx5DTp5glB-oY9Dan8w9V1xw-XKpdJml2U/edit?usp=sharing" target="_blank">
+        <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1.5H3.5a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V5l-3.5-3.5z"/><polyline points="8 1.5 8 5 11.5 5"/><line x1="4.5" y1="7.5" x2="9.5" y2="7.5"/><line x1="4.5" y1="9.5" x2="7.5" y2="9.5"/></svg>
+        Docs
+      </a>
+      <a class="badge-a" href="https://canva.link/8cvmkgsqj6mba2j" target="_blank">
+        <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="2" width="12" height="8" rx="1"/><line x1="7" y1="10" x2="7" y2="12.5"/><line x1="4.5" y1="12.5" x2="9.5" y2="12.5"/></svg>
+        Canva
+      </a>
     </div>
   </div>
 
-  <!-- SIDEBAR (desktop) -->
-  <aside class="sidebar">
-    <div class="sidebar-brand">
-      <div class="brand-dot"></div>
-      Toma de Decisiones
-    </div>
-
-    <div class="sidebar-section">
-      <p class="sidebar-label">Recursos</p>
-      <a class="sidebar-link" href="https://docs.google.com/document/d/1MDMz4Vmpypx5DTp5glB-oY9Dan8w9V1xw-XKpdJml2U/edit?usp=sharing" target="_blank">
-        <span class="sidebar-link-icon">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M8 1.5H3.5a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V5l-3.5-3.5z"/>
-            <polyline points="8 1.5 8 5 11.5 5"/>
-            <line x1="4.5" y1="7.5" x2="9.5" y2="7.5"/>
-            <line x1="4.5" y1="9.5" x2="7.5" y2="9.5"/>
-          </svg>
-        </span> Investigación
-      </a>
-      <a class="sidebar-link" href="https://canva.link/8cvmkgsqj6mba2j" target="_blank">
-        <span class="sidebar-link-icon">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="1" y="2" width="12" height="8" rx="1"/>
-            <line x1="7" y1="10" x2="7" y2="12.5"/>
-            <line x1="4.5" y1="12.5" x2="9.5" y2="12.5"/>
-          </svg>
-        </span> Presentación
-      </a>
-    </div>
-
-    <hr class="sidebar-divider" />
-
-    <div class="sidebar-section">
-      <p class="sidebar-label">Secciones</p>
-      <a class="sidebar-nav-item" href="#subtemas">Subtemas</a>
-      <a class="sidebar-nav-item" href="#investigacion">Investigación</a>
-      <a class="sidebar-nav-item" href="#diseno">Diseño</a>
-      <a class="sidebar-nav-item" href="#presentacion">Presentación</a>
-    </div>
-
-    <div class="sidebar-spacer"></div>
-
-    <div class="sidebar-meta">
-      Clase Dinámica<br>2026
-    </div>
-  </aside>
-
-  <!-- MAIN -->
-  <div class="main">
-
-    <!-- PAGE HEADER -->
-    <div class="page-header">
-      <div>
-        <p class="page-eyebrow">Clase dinámica &nbsp;·&nbsp; 2026</p>
-        <h1>Toma de Decisiones</h1>
-        <p>Organización del equipo, subtemas y recursos del proyecto.</p>
-      </div>
-      <div class="header-badges">
-        <a class="badge-link" href="https://docs.google.com/document/d/1MDMz4Vmpypx5DTp5glB-oY9Dan8w9V1xw-XKpdJml2U/edit?usp=sharing" target="_blank">
-          <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M8 1.5H3.5a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V5l-3.5-3.5z"/>
-            <polyline points="8 1.5 8 5 11.5 5"/>
-            <line x1="4.5" y1="7.5" x2="9.5" y2="7.5"/>
-            <line x1="4.5" y1="9.5" x2="7.5" y2="9.5"/>
-          </svg>
-          Docs
-        </a>
-        <a class="badge-link" href="https://canva.link/8cvmkgsqj6mba2j" target="_blank">
-          <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="1" y="2" width="12" height="8" rx="1"/>
-            <line x1="7" y1="10" x2="7" y2="12.5"/>
-            <line x1="4.5" y1="12.5" x2="9.5" y2="12.5"/>
-          </svg>
-          Canva
-        </a>
+  <!-- ANUNCIOS -->
+  <div class="sec" id="anuncios">
+    <p class="sec-title">Anuncios</p>
+    <div class="ann-box">
+      <div class="ann-head"><span class="ann-head-label">Para todos los equipos</span></div>
+      <div class="ann-list" id="ann-list"><p class="ann-empty">Sin anuncios aún.</p></div>
+      <div class="ann-form">
+        <input class="ann-inp" id="ann-inp" placeholder="Escribe un anuncio para todos..." />
+        <button class="ann-btn" id="ann-btn">Publicar</button>
       </div>
     </div>
+  </div>
 
-    <!-- SUBTEMAS -->
-    <div class="sec" id="subtemas">
-      <p class="sec-title">Subtemas a exponer</p>
-      <div class="subtemas-row">
-        <div class="subtema-card">
-          <p class="subtema-num">Subtema 01</p>
-          <p class="subtema-heading">El proceso de toma de decisiones empresariales.</p>
-        </div>
-        <div class="subtema-card">
-          <p class="subtema-num">Subtema 02</p>
-          <p class="subtema-heading">Los factores fundamentales para la toma de decisiones:</p>
-          <ul class="subtema-items">
-            <li>Conocimiento de los datos y análisis de la información</li>
-            <li>Identificar la toma de decisiones en el ejercicio de liderazgo</li>
-            <li>Enlistar las fases de la toma de decisiones en el liderazgo</li>
-          </ul>
-        </div>
+  <!-- SUBTEMAS -->
+  <div class="sec" id="subtemas">
+    <p class="sec-title">Subtemas a exponer</p>
+    <div class="sub-row">
+      <div class="sub-card">
+        <p class="sub-num">Subtema 01</p>
+        <p class="sub-h">El proceso de toma de decisiones empresariales.</p>
+      </div>
+      <div class="sub-card">
+        <p class="sub-num">Subtema 02</p>
+        <p class="sub-h">Los factores fundamentales para la toma de decisiones:</p>
+        <ul class="sub-list">
+          <li>Conocimiento de los datos y análisis de la información</li>
+          <li>Identificar la toma de decisiones en el ejercicio de liderazgo</li>
+          <li>Enlistar las fases de la toma de decisiones en el liderazgo</li>
+        </ul>
       </div>
     </div>
+  </div>
 
-    <!-- EQUIPOS -->
-    <div class="sec">
-      <p class="sec-title">Equipos</p>
-      <div class="equipos-grid">
+  <!-- EQUIPOS (generados por JS) -->
+  <div class="sec">
+    <p class="sec-title">Equipos</p>
+    <div class="eq-grid" id="eq-grid"></div>
+  </div>
 
-        <!-- Investigación -->
-        <div class="equipo-card" id="investigacion">
-          <div class="equipo-head">
-            <p class="equipo-name">Investigación</p>
-            <div class="members">
-              <span class="member">Saúl</span>
-              <span class="member">Stephanie</span>
-              <span class="member">Yayoo</span>
-              <span class="member">Karely</span>
-              <span class="member">Papalote</span>
-              <span class="member">Hiram</span>
-              <span class="member">Vani</span>
-            </div>
-          </div>
-          <div class="equipo-body">
-            <p class="tasks-label">Tareas</p>
-            <div class="task-row"><span class="chk"></span>Investigar el tema en fuentes confiables</div>
-            <div class="task-row"><span class="chk"></span>Identificar conceptos principales y secundarios</div>
-            <div class="task-row"><span class="chk"></span>Buscar ejemplos y casos prácticos</div>
-            <div class="task-row"><span class="chk"></span>Seleccionar imágenes, gráficos y estadísticas</div>
-            <div class="task-row"><span class="chk"></span>Elaborar resumen de la información</div>
-            <div class="task-row"><span class="chk"></span>Verificar que la información sea correcta</div>
-            <div class="task-row"><span class="chk"></span>Entregar contenido al equipo de diseño</div>
-            <div class="task-row"><span class="chk"></span>Preparar preguntas posibles del profesor</div>
-            <div class="deliverables">
-              <p class="del-label">Entregables</p>
-              <ul class="del-list">
-                <li>Documento de investigación</li>
-                <li>Resumen ejecutivo del tema</li>
-                <li>Bibliografía / referencias</li>
-              </ul>
-            </div>
-          </div>
-          <div class="workspace">
-            <div class="workspace-head">
-              <span class="workspace-label">Avances del equipo</span>
-              <span class="workspace-status" id="status-investigacion"></span>
-            </div>
-            <textarea class="workspace-textarea" id="notas-investigacion" placeholder="Escribe aquí notas, avances, links o ideas del equipo..."></textarea>
-          </div>
+</div><!-- /main -->
+
+<script type="module">
+import { initializeApp }   from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getFirestore, doc, collection, addDoc, setDoc, onSnapshot, query, orderBy, deleteDoc, serverTimestamp }
+  from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+import { getStorage, ref as sref, uploadBytesResumable, getDownloadURL, deleteObject }
+  from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js';
+
+const firebaseConfig = {
+  apiKey:            "AIzaSyAR2jx3BlyzTs2RzZZ5F3AbVS1s3c69vl4",
+  authDomain:        "tomadecisiones.firebaseapp.com",
+  projectId:         "tomadecisiones",
+  storageBucket:     "tomadecisiones.firebasestorage.app",
+  messagingSenderId: "1070119646245",
+  appId:             "1:1070119646245:web:18a655acc80f78a8f03bcc"
+};
+
+const app     = initializeApp(firebaseConfig);
+const db      = getFirestore(app);
+const storage = getStorage(app);
+
+/* ── DATA ── */
+const EQUIPOS = {
+  investigacion: {
+    nombre: 'Investigación',
+    members: ['Saúl','Stephanie','Yayoo','Karely','Papalote','Hiram','Vani'],
+    tareas: [
+      'Investigar el tema en fuentes confiables',
+      'Identificar conceptos principales y secundarios',
+      'Buscar ejemplos y casos prácticos',
+      'Seleccionar imágenes, gráficos y estadísticas',
+      'Elaborar resumen de la información',
+      'Verificar que la información sea correcta',
+      'Entregar contenido al equipo de diseño',
+      'Preparar preguntas posibles del profesor'
+    ],
+    entregables: ['Documento de investigación','Resumen ejecutivo del tema','Bibliografía / referencias']
+  },
+  diseno: {
+    nombre: 'Diseño',
+    members: ['Jess','Miguelin','Karely','David','Danna'],
+    tareas: [
+      'Definir estructura de la presentación',
+      'Diseñar portada y diapositivas',
+      'Organizar la información de forma clara',
+      'Agregar imágenes, diagramas y gráficos',
+      'Mantener línea de diseño uniforme',
+      'Corregir ortografía y redacción',
+      'Incluir diapositiva de conclusiones',
+      'Incluir diapositiva de preguntas y referencias'
+    ],
+    entregables: ['Presentación final (Canva)','Material visual de apoyo']
+  },
+  presentacion: {
+    nombre: 'Presentación',
+    members: ['Kikin','Tiburcio','Leo','Cholo','Gabriel'],
+    tareas: [
+      'Estudiar completamente la presentación',
+      'Dividir los temas entre integrantes',
+      'Preparar introducción y conclusión',
+      'Practicar la exposición',
+      'Controlar el tiempo asignado',
+      'Resolver dudas del grupo',
+      'Coordinar cambios de expositor',
+      'Preparar respuestas para preguntas frecuentes'
+    ],
+    entregables: ['Exposición oral','Sesión de preguntas y respuestas']
+  }
+};
+
+/* ── SVGs ── */
+const SVG_CHECK = `<svg class="chk-svg" width="7" height="6" viewBox="0 0 7 6" fill="none"><polyline points="1,3 3,5 6,1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const SVG_FILE  = `<svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1.5H3.5a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V5l-3.5-3.5z"/><polyline points="8 1.5 8 5 11.5 5"/></svg>`;
+const SVG_X     = `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/></svg>`;
+const SVG_LINK  = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6.5 9.5a3.536 3.536 0 0 0 5 0l2-2a3.536 3.536 0 0 0-5-5l-1 1"/><path d="M9.5 6.5a3.536 3.536 0 0 0-5 0l-2 2a3.536 3.536 0 0 0 5 5l1-1"/></svg>`;
+const SVG_UP    = `<svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 5 7 2 10 5"/><line x1="7" y1="2" x2="7" y2="10"/><path d="M2 12h10"/></svg>`;
+
+/* ── USER ── */
+const userInput = document.getElementById('user-name');
+userInput.value = localStorage.getItem('td-nombre') || '';
+userInput.addEventListener('input', () => localStorage.setItem('td-nombre', userInput.value.trim()));
+const getUser = () => localStorage.getItem('td-nombre') || 'Anónimo';
+
+/* ── BUILD CARDS ── */
+const grid = document.getElementById('eq-grid');
+Object.entries(EQUIPOS).forEach(([id, cfg]) => {
+  const tareaRows = cfg.tareas.map((t, i) => `
+    <div class="task-row" id="task-${id}-${i}" data-eq="${id}" data-idx="${i}">
+      <span class="chk">${SVG_CHECK}</span><span class="task-txt">${t}</span>
+    </div>`).join('');
+
+  const entregables = cfg.entregables.map(e => `<li>${e}</li>`).join('');
+
+  const members = cfg.members.map(m => `<span class="member">${m}</span>`).join('');
+
+  grid.insertAdjacentHTML('beforeend', `
+    <div class="eq-card" id="${id}">
+      <div class="eq-head">
+        <div class="eq-head-top">
+          <p class="eq-name">${cfg.nombre}</p>
+          <button class="status-btn sin_iniciar" id="status-${id}" data-eq="${id}">Sin iniciar</button>
         </div>
-
-        <!-- Diseño -->
-        <div class="equipo-card" id="diseno">
-          <div class="equipo-head">
-            <p class="equipo-name">Diseño</p>
-            <div class="members">
-              <span class="member">Jess</span>
-              <span class="member">Miguelin</span>
-              <span class="member">Karely</span>
-              <span class="member">David</span>
-              <span class="member">Danna</span>
-            </div>
-          </div>
-          <div class="equipo-body">
-            <p class="tasks-label">Tareas</p>
-            <div class="task-row"><span class="chk"></span>Definir estructura de la presentación</div>
-            <div class="task-row"><span class="chk"></span>Diseñar portada y diapositivas</div>
-            <div class="task-row"><span class="chk"></span>Organizar la información de forma clara</div>
-            <div class="task-row"><span class="chk"></span>Agregar imágenes, diagramas y gráficos</div>
-            <div class="task-row"><span class="chk"></span>Mantener línea de diseño uniforme</div>
-            <div class="task-row"><span class="chk"></span>Corregir ortografía y redacción</div>
-            <div class="task-row"><span class="chk"></span>Incluir diapositiva de conclusiones</div>
-            <div class="task-row"><span class="chk"></span>Incluir diapositiva de preguntas y referencias</div>
-            <div class="deliverables">
-              <p class="del-label">Entregables</p>
-              <ul class="del-list">
-                <li>Presentación final (Canva)</li>
-                <li>Material visual de apoyo</li>
-              </ul>
-            </div>
-          </div>
-          <div class="workspace">
-            <div class="workspace-head">
-              <span class="workspace-label">Avances del equipo</span>
-              <span class="workspace-status" id="status-diseno"></span>
-            </div>
-            <textarea class="workspace-textarea" id="notas-diseno" placeholder="Escribe aquí notas, avances, links o ideas del equipo..."></textarea>
-          </div>
-        </div>
-
-        <!-- Presentación -->
-        <div class="equipo-card" id="presentacion">
-          <div class="equipo-head">
-            <p class="equipo-name">Presentación</p>
-            <div class="members">
-              <span class="member">Kikin</span>
-              <span class="member">Tiburcio</span>
-              <span class="member">Leo</span>
-              <span class="member">Cholo</span>
-              <span class="member">Gabriel</span>
-            </div>
-          </div>
-          <div class="equipo-body">
-            <p class="tasks-label">Tareas</p>
-            <div class="task-row"><span class="chk"></span>Estudiar completamente la presentación</div>
-            <div class="task-row"><span class="chk"></span>Dividir los temas entre integrantes</div>
-            <div class="task-row"><span class="chk"></span>Preparar introducción y conclusión</div>
-            <div class="task-row"><span class="chk"></span>Practicar la exposición</div>
-            <div class="task-row"><span class="chk"></span>Controlar el tiempo asignado</div>
-            <div class="task-row"><span class="chk"></span>Resolver dudas del grupo</div>
-            <div class="task-row"><span class="chk"></span>Coordinar cambios de expositor</div>
-            <div class="task-row"><span class="chk"></span>Preparar respuestas para preguntas frecuentes</div>
-            <div class="deliverables">
-              <p class="del-label">Entregables</p>
-              <ul class="del-list">
-                <li>Exposición oral</li>
-                <li>Sesión de preguntas y respuestas</li>
-              </ul>
-            </div>
-          </div>
-          <div class="workspace">
-            <div class="workspace-head">
-              <span class="workspace-label">Avances del equipo</span>
-              <span class="workspace-status" id="status-presentacion"></span>
-            </div>
-            <textarea class="workspace-textarea" id="notas-presentacion" placeholder="Escribe aquí notas, avances, links o ideas del equipo..."></textarea>
-          </div>
-        </div>
-
+        <div class="members">${members}</div>
       </div>
-    </div>
 
-  </div><!-- /main -->
+      <div class="eq-tabs">
+        <button class="tab-btn active" data-eq="${id}" data-tab="tareas">Tareas</button>
+        <button class="tab-btn" data-eq="${id}" data-tab="feed">Actualizaciones</button>
+        <button class="tab-btn" data-eq="${id}" data-tab="archivos">Archivos</button>
+        <button class="tab-btn" data-eq="${id}" data-tab="links">Links</button>
+      </div>
 
-  <!-- ═══════════════════════════════════════════
-       FIREBASE
-  ═══════════════════════════════════════════ -->
-  <script type="module">
-    import { initializeApp }              from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-    import { getFirestore, doc, getDoc, setDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+      <div class="tab-panel active" id="panel-tareas-${id}">
+        <div class="panel-body">
+          <p class="tasks-lbl">Tareas</p>
+          ${tareaRows}
+          <div class="deliverables">
+            <p class="del-lbl">Entregables</p>
+            <ul class="del-list">${entregables}</ul>
+          </div>
+        </div>
+      </div>
 
-    const firebaseConfig = {
-      apiKey:            "AIzaSyAR2jx3BlyzTs2RzZZ5F3AbVS1s3c69vl4",
-      authDomain:        "tomadecisiones.firebaseapp.com",
-      projectId:         "tomadecisiones",
-      storageBucket:     "tomadecisiones.firebasestorage.app",
-      messagingSenderId: "1070119646245",
-      appId:             "1:1070119646245:web:18a655acc80f78a8f03bcc"
-    };
+      <div class="tab-panel" id="panel-feed-${id}">
+        <div class="feed-list" id="feed-list-${id}"><p class="feed-empty">Sin actualizaciones aún.</p></div>
+        <div class="feed-form">
+          <textarea class="feed-inp" id="feed-inp-${id}" rows="2" placeholder="Escribe un avance o nota... (Ctrl+Enter para enviar)"></textarea>
+          <button class="feed-send" id="feed-btn-${id}">Enviar</button>
+        </div>
+      </div>
 
-    const app = initializeApp(firebaseConfig);
-    const db  = getFirestore(app);
+      <div class="tab-panel" id="panel-archivos-${id}">
+        <div class="file-body" id="file-list-${id}"><p class="file-empty">Sin archivos aún.</p></div>
+        <div class="panel-foot">
+          <label class="upload-lbl">
+            ${SVG_UP} &nbsp;Subir archivo
+            <input type="file" id="file-inp-${id}" hidden multiple />
+          </label>
+          <div class="prog-wrap" id="prog-wrap-${id}"><div class="prog-bar" id="prog-bar-${id}"></div></div>
+        </div>
+      </div>
 
-    const equipos = ['investigacion', 'diseno', 'presentacion'];
-    const timers  = {};
+      <div class="tab-panel" id="panel-links-${id}">
+        <div class="lk-body" id="lk-cards-${id}"><p class="lk-empty">Sin links aún.</p></div>
+        <div class="lk-form">
+          <input class="lk-inp" id="lk-inp-${id}" placeholder="Pega un link de YouTube, Drive u otra URL..." />
+          <button class="lk-add" id="lk-btn-${id}">Agregar</button>
+        </div>
+      </div>
+    </div>`);
+});
 
-    function setStatus(equipo, msg, cls) {
-      const el = document.getElementById(`status-${equipo}`);
-      el.textContent = msg;
-      el.className = `workspace-status ${cls}`;
-    }
+/* ── TABS ── */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const eq  = btn.dataset.eq;
+    const tab = btn.dataset.tab;
+    document.querySelectorAll(`.tab-btn[data-eq="${eq}"]`).forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll(`#${eq} .tab-panel`).forEach(p => p.classList.remove('active'));
+    document.getElementById(`panel-${tab}-${eq}`).classList.add('active');
+  });
+});
 
-    function autoResize(ta) {
-      ta.style.height = 'auto';
-      ta.style.height = ta.scrollHeight + 'px';
-    }
+/* ── INIT EQUIPOS ── */
+const STATUS_MAP = { sin_iniciar: 'Sin iniciar', en_progreso: 'En progreso', listo: 'Listo' };
+const STATUS_CYCLE = { sin_iniciar: 'en_progreso', en_progreso: 'listo', listo: 'sin_iniciar' };
 
-    equipos.forEach(equipo => {
-      const textarea = document.getElementById(`notas-${equipo}`);
-      const ref      = doc(db, 'equipos', equipo);
+Object.keys(EQUIPOS).forEach(eq => {
+  const eqRef = doc(db, 'equipos', eq);
 
-      // Escuchar cambios en tiempo real
-      onSnapshot(ref, snap => {
-        if (!snap.exists()) return;
-        const data = snap.data();
-        // Solo actualizar si el textarea no está enfocado (para no interrumpir al que escribe)
-        if (document.activeElement !== textarea) {
-          textarea.value = data.notas || '';
-          autoResize(textarea);
-        }
-      });
+  /* Estado + tareas */
+  onSnapshot(eqRef, snap => {
+    const data = snap.data() || {};
+    const estado = data.estado || 'sin_iniciar';
+    const badge = document.getElementById(`status-${eq}`);
+    badge.className = `status-btn ${estado}`;
+    badge.textContent = STATUS_MAP[estado];
 
-      // Auto-resize al escribir
-      textarea.addEventListener('input', () => {
-        autoResize(textarea);
-
-        // Debounce: guardar 1s después de que deje de escribir
-        setStatus(equipo, 'Guardando...', 'saving');
-        clearTimeout(timers[equipo]);
-        timers[equipo] = setTimeout(async () => {
-          try {
-            await setDoc(ref, { notas: textarea.value }, { merge: true });
-            setStatus(equipo, 'Guardado', 'saved');
-            setTimeout(() => setStatus(equipo, '', ''), 2500);
-          } catch (e) {
-            setStatus(equipo, 'Error al guardar', '');
-          }
-        }, 1000);
-      });
+    const tareas = data.tareas || {};
+    EQUIPOS[eq].tareas.forEach((_, i) => {
+      const row = document.getElementById(`task-${eq}-${i}`);
+      if (row) row.classList.toggle('done', !!tareas[i]);
     });
-  </script>
+  });
 
+  /* Status click */
+  document.getElementById(`status-${eq}`).addEventListener('click', () => {
+    const cur  = document.getElementById(`status-${eq}`).className.split(' ').find(c => STATUS_CYCLE[c]);
+    const next = STATUS_CYCLE[cur] || 'sin_iniciar';
+    setDoc(eqRef, { estado: next }, { merge: true });
+  });
+
+  /* Checkbox click */
+  EQUIPOS[eq].tareas.forEach((_, i) => {
+    document.getElementById(`task-${eq}-${i}`).addEventListener('click', () => {
+      const done = document.getElementById(`task-${eq}-${i}`).classList.contains('done');
+      setDoc(eqRef, { tareas: { [i]: !done } }, { merge: true });
+    });
+  });
+
+  initFeed(eq);
+  initFiles(eq);
+  initLinks(eq);
+});
+
+/* ── FEED ── */
+function initFeed(eq) {
+  const colRef = collection(db, 'equipos', eq, 'feed');
+  const q = query(colRef, orderBy('timestamp', 'asc'));
+
+  onSnapshot(q, snap => {
+    const list = document.getElementById(`feed-list-${eq}`);
+    if (snap.empty) { list.innerHTML = '<p class="feed-empty">Sin actualizaciones aún.</p>'; return; }
+    list.innerHTML = '';
+    snap.forEach(d => {
+      const data = d.data();
+      const el = document.createElement('div');
+      el.className = 'feed-entry';
+      el.innerHTML = `<div class="feed-meta"><span class="feed-author">${esc(data.autor)}</span><span class="feed-time">${relTime(data.timestamp?.toDate())}</span></div><p class="feed-txt">${esc(data.texto)}</p>`;
+      list.appendChild(el);
+    });
+    list.scrollTop = list.scrollHeight;
+  });
+
+  const btn = document.getElementById(`feed-btn-${eq}`);
+  const inp = document.getElementById(`feed-inp-${eq}`);
+
+  btn.addEventListener('click', async () => {
+    const texto = inp.value.trim();
+    if (!texto) return;
+    await addDoc(collection(db, 'equipos', eq, 'feed'), { texto, autor: getUser(), timestamp: serverTimestamp() });
+    inp.value = '';
+  });
+
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) btn.click(); });
+}
+
+/* ── FILES ── */
+function initFiles(eq) {
+  const colRef = collection(db, 'equipos', eq, 'archivos');
+  const q = query(colRef, orderBy('timestamp', 'desc'));
+
+  onSnapshot(q, snap => {
+    const list = document.getElementById(`file-list-${eq}`);
+    if (snap.empty) { list.innerHTML = '<p class="file-empty">Sin archivos aún.</p>'; return; }
+    list.innerHTML = '';
+    snap.forEach(docSnap => {
+      const d = docSnap.data();
+      const el = document.createElement('div');
+      el.className = 'file-item';
+      el.innerHTML = `<span class="file-ico" style="color:var(--g2)">${SVG_FILE}</span><span class="file-name">${esc(d.nombre)}</span><a class="file-open" href="${d.url}" target="_blank">Abrir</a><button class="icon-btn" title="Eliminar">${SVG_X}</button>`;
+      el.querySelector('.icon-btn').addEventListener('click', async () => {
+        try { await deleteObject(sref(storage, d.storagePath)); } catch(_) {}
+        await deleteDoc(doc(db, 'equipos', eq, 'archivos', docSnap.id));
+      });
+      list.appendChild(el);
+    });
+  });
+
+  const inp   = document.getElementById(`file-inp-${eq}`);
+  const wrap  = document.getElementById(`prog-wrap-${eq}`);
+  const bar   = document.getElementById(`prog-bar-${eq}`);
+
+  inp.addEventListener('change', () => {
+    Array.from(inp.files).forEach(file => {
+      const path    = `equipos/${eq}/${Date.now()}_${file.name}`;
+      const storRef = sref(storage, path);
+      const task    = uploadBytesResumable(storRef, file);
+      wrap.style.display = 'block';
+      task.on('state_changed',
+        s => { bar.style.width = (s.bytesTransferred / s.totalBytes * 100) + '%'; },
+        err => console.error(err),
+        async () => {
+          const url = await getDownloadURL(task.snapshot.ref);
+          await addDoc(collection(db, 'equipos', eq, 'archivos'), { nombre: file.name, url, storagePath: path, timestamp: serverTimestamp() });
+          wrap.style.display = 'none';
+          bar.style.width = '0%';
+        }
+      );
+    });
+    inp.value = '';
+  });
+}
+
+/* ── LINKS ── */
+function initLinks(eq) {
+  const colRef = collection(db, 'equipos', eq, 'links');
+  const q = query(colRef, orderBy('timestamp', 'desc'));
+
+  onSnapshot(q, snap => {
+    const cards = document.getElementById(`lk-cards-${eq}`);
+    if (snap.empty) { cards.innerHTML = '<p class="lk-empty">Sin links aún.</p>'; return; }
+    cards.innerHTML = '';
+    snap.forEach(docSnap => {
+      const d   = docSnap.data();
+      const el  = document.createElement('div');
+      el.className = 'lk-card';
+      const thumb = d.thumbnail
+        ? `<div class="lk-thumb"><img src="${d.thumbnail}" alt="" /></div>`
+        : `<div class="lk-thumb" style="min-height:60px;color:var(--g3)">${SVG_LINK}</div>`;
+      el.innerHTML = `${thumb}<div class="lk-info"><p class="lk-type">${d.tipo}</p><p class="lk-title">${esc(d.titulo || d.url)}</p><a class="lk-url" href="${d.url}" target="_blank">${d.url}</a></div><button class="lk-del" title="Eliminar">${SVG_X}</button>`;
+      el.querySelector('.lk-del').addEventListener('click', () => deleteDoc(doc(db, 'equipos', eq, 'links', docSnap.id)));
+      cards.appendChild(el);
+    });
+  });
+
+  const inp = document.getElementById(`lk-inp-${eq}`);
+  const btn = document.getElementById(`lk-btn-${eq}`);
+
+  btn.addEventListener('click', async () => {
+    const url = inp.value.trim();
+    if (!url) return;
+
+    let tipo = 'Link', thumbnail = null, titulo = url;
+    const yt = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+    if (yt) {
+      tipo = 'YouTube';
+      thumbnail = `https://img.youtube.com/vi/${yt[1]}/mqdefault.jpg`;
+      try {
+        const r = await fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`);
+        titulo = (await r.json()).title;
+      } catch(_) { titulo = 'Video de YouTube'; }
+    } else if (url.includes('drive.google.com')) {
+      tipo = 'Google Drive';
+    } else if (url.includes('docs.google.com')) {
+      tipo = 'Google Docs';
+    }
+
+    await addDoc(collection(db, 'equipos', eq, 'links'), { url, tipo, titulo, thumbnail, timestamp: serverTimestamp() });
+    inp.value = '';
+  });
+
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter') btn.click(); });
+}
+
+/* ── ANNOUNCEMENTS ── */
+const annQ = query(collection(db, 'anuncios'), orderBy('timestamp', 'desc'));
+onSnapshot(annQ, snap => {
+  const list = document.getElementById('ann-list');
+  if (snap.empty) { list.innerHTML = '<p class="ann-empty">Sin anuncios aún.</p>'; return; }
+  list.innerHTML = '';
+  snap.forEach(d => {
+    const data = d.data();
+    const el = document.createElement('div');
+    el.className = 'ann-item';
+    el.innerHTML = `<span class="ann-author">${esc(data.autor)}</span><span class="ann-text">${esc(data.texto)}</span><span class="ann-time">${relTime(data.timestamp?.toDate())}</span>`;
+    list.appendChild(el);
+  });
+});
+
+document.getElementById('ann-btn').addEventListener('click', async () => {
+  const inp   = document.getElementById('ann-inp');
+  const texto = inp.value.trim();
+  if (!texto) return;
+  await addDoc(collection(db, 'anuncios'), { texto, autor: getUser(), timestamp: serverTimestamp() });
+  inp.value = '';
+});
+document.getElementById('ann-inp').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('ann-btn').click(); });
+
+/* ── UTILS ── */
+function esc(s = '') {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function relTime(date) {
+  if (!date) return '';
+  const s = Math.floor((Date.now() - date) / 1000);
+  if (s < 60)   return 'ahora';
+  if (s < 3600) return `hace ${Math.floor(s/60)} min`;
+  if (s < 86400) return `hace ${Math.floor(s/3600)} h`;
+  return date.toLocaleDateString('es-MX', { day: 'numeric', month: 'short' });
+}
+</script>
 </body>
 </html>
