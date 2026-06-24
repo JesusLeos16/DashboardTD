@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diseño — Toma de Decisiones</title>
+  <link rel="icon" type="image/jpeg" href="logo.jpg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="topbar">
+  <a class="tb-brand" href="index.html">
+    <img class="tb-logo" src="logo.jpg" alt="logo" />Toma de Decisiones
+  </a>
+  <div class="tb-links">
+    <a class="tb-link" href="index.html">Dashboard</a>
+    <a class="tb-link" href="investigacion.html">Invest.</a>
+    <a class="tb-link" href="presentacion.html">Present.</a>
+  </div>
+</div>
+
+<aside class="sidebar">
+  <a class="sb-brand" href="index.html">
+    <img class="sb-logo" src="logo.jpg" alt="logo" />Toma de Decisiones
+  </a>
+
+  <div class="sb-sec user-wrap">
+    <div class="sb-label">Tu nombre</div>
+    <input class="user-input" id="user-name" type="text" placeholder="Escribe tu nombre…" maxlength="30" />
+  </div>
+
+  <div class="sb-sec">
+    <div class="sb-label">General</div>
+    <a class="sb-link" href="index.html">
+      <span class="sb-ico"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.4"/><rect x="9" y="1" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.4"/><rect x="1" y="9" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.4"/><rect x="9" y="9" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.4"/></svg></span>Dashboard
+    </a>
+  </div>
+
+  <div class="sb-sec">
+    <div class="sb-label">Equipos</div>
+    <a class="sb-nav" href="investigacion.html"><div class="sb-nav-dot"></div>Investigación</a>
+    <a class="sb-nav active" href="diseno.html"><div class="sb-nav-dot"></div>Diseño</a>
+    <a class="sb-nav" href="presentacion.html"><div class="sb-nav-dot"></div>Presentación</a>
+  </div>
+
+  <hr class="sb-div" />
+
+  <div class="sb-sec">
+    <div class="sb-label">Recursos</div>
+    <a class="sb-link" href="https://docs.google.com/document/d/1MDMz4Vmpypx5DTp5glB-oY9Dan8w9V1xw-XKpdJml2U/edit?usp=sharing" target="_blank">
+      <span class="sb-ico"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 2.5A1.5 1.5 0 014.5 1h5L13 4.5v9a1.5 1.5 0 01-1.5 1.5h-7A1.5 1.5 0 013 13.5v-11z" stroke="currentColor" stroke-width="1.4"/><path d="M9.5 1v3.5H13" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></span>Investigación
+    </a>
+    <a class="sb-link" href="https://canva.link/8cvmkgsqj6mba2j" target="_blank">
+      <span class="sb-ico"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M5 8h6M8 5v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>Canva
+    </a>
+  </div>
+
+  <div class="sb-spacer"></div>
+  <div class="sb-meta">Clase Dinámica — Equipo 3</div>
+</aside>
+
+<div class="main">
+  <div class="breadcrumb">
+    <a href="index.html">Dashboard</a>
+    <span>›</span>
+    <span>Diseño</span>
+  </div>
+
+  <div class="eq-view-head">
+    <div>
+      <div class="eq-view-name">Equipo de Diseño</div>
+      <div class="eq-members">
+        <span class="member">Jess</span><span class="member">Miguelin</span><span class="member">Karely</span>
+        <span class="member">David</span><span class="member">Danna</span>
+      </div>
+    </div>
+    <button class="status-btn" id="status-btn">Sin iniciar</button>
+  </div>
+
+  <div class="eq-tabs">
+    <button class="tab-btn active" data-tab="tareas">Tareas</button>
+    <button class="tab-btn" data-tab="feed">Actualizaciones</button>
+    <button class="tab-btn" data-tab="archivos">Archivos</button>
+    <button class="tab-btn" data-tab="links">Links</button>
+  </div>
+
+  <div class="tab-panel active" id="tab-tareas">
+    <div class="panel-scroll">
+      <div class="tasks-lbl">Tareas del equipo</div>
+      <div id="task-list">
+        <div class="task-row" data-i="0"><div class="chk"><svg class="chk-svg" width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.5 6L8 1" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg></div><span class="task-txt">Definir la estructura de la presentación</span></div>
+        <div class="task-row" data-i="1"><div class="chk"><svg class="chk-svg" width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.5 6L8 1" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg></div><span class="task-txt">Diseñar portada y diapositivas</span></div>
+        <div class="task-row" data-i="2"><div class="chk"><svg class="chk-svg" width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.5 6L8 1" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg></div><span class="task-txt">Organizar la información de forma clara y resumida</span></div>
+        <div class="task-row" data-i="3"><div class="chk"><svg class="chk-svg" width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.5 6L8 1" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg></div><span class="task-txt">Agregar imágenes, diagramas y gráficos</span></div>
+        <div class="task-row" data-i="4"><div class="chk"><svg class="chk-svg" width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.5 6L8 1" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg></div><span class="task-txt">Mantener una línea de diseño uniforme (colores, fuentes, estilos)</span></div>
+        <div class="task-row" data-i="5"><div class="chk"><svg class="chk-svg" width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.5 6L8 1" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg></div><span class="task-txt">Corregir ortografía y redacción</span></div>
+        <div class="task-row" data-i="6"><div class="chk"><svg class="chk-svg" width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.5 6L8 1" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg></div><span class="task-txt">Incluir diapositiva de conclusiones</span></div>
+        <div class="task-row" data-i="7"><div class="chk"><svg class="chk-svg" width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.5 6L8 1" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg></div><span class="task-txt">Incluir diapositiva de preguntas y referencias</span></div>
+      </div>
+      <div class="deliverables">
+        <div class="del-lbl">Entregables</div>
+        <ul class="del-list">
+          <li>Presentación final (PowerPoint, Canva o Google Slides)</li>
+          <li>Material visual de apoyo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-feed">
+    <div class="feed-wrap">
+      <div class="feed-list" id="feed-list"><div class="feed-empty">Sin actualizaciones aún.</div></div>
+      <div class="feed-form">
+        <textarea class="feed-inp" id="feed-inp" rows="2" placeholder="Escribe una actualización…" maxlength="500"></textarea>
+        <button class="grn-btn" id="feed-btn">Enviar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-archivos">
+    <div class="file-wrap">
+      <div class="file-body" id="file-body"><div class="file-empty">Sin archivos aún.</div></div>
+      <div class="file-foot">
+        <label class="upload-lbl">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M8 11V3M4 6l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M2 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Subir archivo
+          <input type="file" id="file-inp" style="display:none" />
+        </label>
+        <div class="prog-wrap" id="prog-wrap"><div class="prog-bar" id="prog-bar"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-links">
+    <div class="lk-wrap">
+      <div class="lk-body" id="lk-body"><div class="lk-empty">Sin links aún.</div></div>
+      <div class="lk-form">
+        <input class="lk-inp" id="lk-inp" type="url" placeholder="Pegar link (YouTube, Drive, web…)" />
+        <button class="grn-btn" id="lk-btn">Agregar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getFirestore, doc, collection, onSnapshot, addDoc, setDoc, getDoc, serverTimestamp, deleteDoc }
+  from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject }
+  from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAR2jx3BlyzTs2RzZZ5F3AbVS1s3c69vl4",
+  authDomain: "tomadecisiones.firebaseapp.com",
+  projectId: "tomadecisiones",
+  storageBucket: "tomadecisiones.firebasestorage.app",
+  messagingSenderId: "1070119646245",
+  appId: "1:1070119646245:web:18a655acc80f78a8f03bcc"
+};
+const app     = initializeApp(firebaseConfig);
+const db      = getFirestore(app);
+const storage = getStorage(app);
+const EQ_ID   = 'diseno';
+const TOTAL   = 8;
+
+const nameEl = document.getElementById('user-name');
+nameEl.value = localStorage.getItem('td-user') || '';
+nameEl.addEventListener('change', () => localStorage.setItem('td-user', nameEl.value.trim()));
+const getUser = () => nameEl.value.trim() || 'Anónimo';
+
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+const STATUS_CYCLE = ['sin_iniciar','en_progreso','listo'];
+const STATUS_LABELS = { sin_iniciar:'Sin iniciar', en_progreso:'En progreso', listo:'Listo' };
+const statusBtn = document.getElementById('status-btn');
+const eqDocRef  = doc(db,'equipos',EQ_ID,'equipo','estado');
+
+onSnapshot(eqDocRef, snap => {
+  const data = snap.data() || {};
+  const estado = data.estado || 'sin_iniciar';
+  statusBtn.textContent = STATUS_LABELS[estado]||estado;
+  statusBtn.className = `status-btn ${estado}`;
+  const tareas = data.tareas || {};
+  document.querySelectorAll('.task-row').forEach(row => {
+    row.classList.toggle('done', !!tareas[row.dataset.i]);
+  });
+});
+
+statusBtn.addEventListener('click', async () => {
+  const snap = await getDoc(eqDocRef);
+  const cur = snap.data()?.estado || 'sin_iniciar';
+  const next = STATUS_CYCLE[(STATUS_CYCLE.indexOf(cur)+1)%STATUS_CYCLE.length];
+  await setDoc(eqDocRef, { estado: next }, { merge: true });
+});
+
+document.querySelectorAll('.task-row').forEach(row => {
+  row.addEventListener('click', async () => {
+    const snap = await getDoc(eqDocRef);
+    const tareas = { ...(snap.data()?.tareas||{}) };
+    tareas[row.dataset.i] = !tareas[row.dataset.i];
+    const done = Object.values(tareas).filter(Boolean).length;
+    const estado = done===TOTAL?'listo':done>0?'en_progreso':'sin_iniciar';
+    await setDoc(eqDocRef, { tareas, estado }, { merge: true });
+  });
+});
+
+const feedList=document.getElementById('feed-list'),feedInp=document.getElementById('feed-inp'),feedBtn=document.getElementById('feed-btn');
+onSnapshot(collection(db,'equipos',EQ_ID,'feed'), snap => {
+  const items=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(a.timestamp?.seconds||0)-(b.timestamp?.seconds||0));
+  if(!items.length){feedList.innerHTML='<div class="feed-empty">Sin actualizaciones aún.</div>';return;}
+  feedList.innerHTML=items.map(a=>`<div class="feed-entry"><div class="feed-meta"><span class="feed-author">${a.autor||'Anónimo'}</span><span class="feed-time">${fmtTime(a.timestamp?.seconds)}</span></div><div class="feed-txt">${esc(a.texto||'')}</div></div>`).join('');
+  feedList.scrollTop=feedList.scrollHeight;
+});
+feedBtn.addEventListener('click',async()=>{const txt=feedInp.value.trim();if(!txt)return;await addDoc(collection(db,'equipos',EQ_ID,'feed'),{texto:txt,autor:getUser(),timestamp:serverTimestamp()});feedInp.value='';});
+feedInp.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();feedBtn.click();}});
+
+const fileBody=document.getElementById('file-body'),fileInp=document.getElementById('file-inp'),progWrap=document.getElementById('prog-wrap'),progBar=document.getElementById('prog-bar');
+onSnapshot(collection(db,'equipos',EQ_ID,'archivos'), snap => {
+  const items=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(a.timestamp?.seconds||0)-(b.timestamp?.seconds||0));
+  if(!items.length){fileBody.innerHTML='<div class="file-empty">Sin archivos aún.</div>';return;}
+  fileBody.innerHTML=items.map(f=>`<div class="file-item"><span class="file-ico"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 2.5A1.5 1.5 0 014.5 1h5L13 4.5v9a1.5 1.5 0 01-1.5 1.5h-7A1.5 1.5 0 013 13.5v-11z" stroke="currentColor" stroke-width="1.4"/></svg></span><span class="file-name">${esc(f.nombre||'')}</span><a class="file-open" href="${f.url}" target="_blank">Abrir</a><button class="icon-btn" data-id="${f.id}" data-path="${f.storagePath||''}"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M2 4h12M6 4V2h4v2M13 4l-1 10H4L3 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button></div>`).join('');
+  fileBody.querySelectorAll('.icon-btn').forEach(btn=>{btn.addEventListener('click',async()=>{if(!confirm('¿Eliminar?'))return;if(btn.dataset.path)try{await deleteObject(ref(storage,btn.dataset.path));}catch(e){}await deleteDoc(doc(db,'equipos',EQ_ID,'archivos',btn.dataset.id));});});
+});
+fileInp.addEventListener('change',async()=>{const file=fileInp.files[0];if(!file)return;const path=`equipos/${EQ_ID}/${Date.now()}_${file.name}`;const task=uploadBytesResumable(ref(storage,path),file);progWrap.style.display='block';task.on('state_changed',s=>{progBar.style.width=(s.bytesTransferred/s.totalBytes*100)+'%';},err=>alert(err.message),async()=>{const url=await getDownloadURL(task.snapshot.ref);await addDoc(collection(db,'equipos',EQ_ID,'archivos'),{nombre:file.name,url,storagePath:path,timestamp:serverTimestamp()});progWrap.style.display='none';progBar.style.width='0%';fileInp.value='';});});
+
+const lkBody=document.getElementById('lk-body'),lkInp=document.getElementById('lk-inp'),lkBtn=document.getElementById('lk-btn');
+onSnapshot(collection(db,'equipos',EQ_ID,'links'), snap => {
+  const items=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(a.timestamp?.seconds||0)-(b.timestamp?.seconds||0));
+  if(!items.length){lkBody.innerHTML='<div class="lk-empty">Sin links aún.</div>';return;}
+  lkBody.innerHTML=items.map(l=>`<div class="lk-card"><div class="lk-thumb">${l.thumbnail?`<img src="${l.thumbnail}" alt="" />`:`<svg width="20" height="20" viewBox="0 0 16 16" fill="none"><path d="M2 8a6 6 0 1112 0A6 6 0 012 8z" stroke="#ccc" stroke-width="1.4"/></svg>`}</div><div class="lk-info"><div class="lk-type">${l.tipo||'Link'}</div><div class="lk-title">${esc(l.titulo||l.url||'')}</div><a class="lk-url" href="${l.url}" target="_blank">${l.url}</a></div><button class="lk-del" data-id="${l.id}"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M2 4h12M6 4V2h4v2M13 4l-1 10H4L3 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button></div>`).join('');
+  lkBody.querySelectorAll('.lk-del').forEach(btn=>{btn.addEventListener('click',async()=>await deleteDoc(doc(db,'equipos',EQ_ID,'links',btn.dataset.id)));});
+});
+lkBtn.addEventListener('click',async()=>{const url=lkInp.value.trim();if(!url)return;const yt=url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);let titulo=url,thumbnail='',tipo='Link';if(yt){tipo='YouTube';thumbnail=`https://img.youtube.com/vi/${yt[1]}/mqdefault.jpg`;try{const r=await fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`);const j=await r.json();titulo=j.title;}catch(e){}}await addDoc(collection(db,'equipos',EQ_ID,'links'),{url,titulo,thumbnail,tipo,timestamp:serverTimestamp()});lkInp.value='';});
+lkInp.addEventListener('keydown',e=>{if(e.key==='Enter')lkBtn.click();});
+
+function fmtTime(sec){if(!sec)return'';return new Date(sec*1000).toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'});}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+</script>
+</body>
+</html>
