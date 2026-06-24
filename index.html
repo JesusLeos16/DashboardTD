@@ -43,13 +43,13 @@
 
   <div class="sb-sec">
     <div class="sb-label">Equipos</div>
-    <a class="sb-nav" href="investigacion.html">
+    <a class="sb-nav" href="investigacion.html" target="_blank">
       <div class="sb-nav-dot"></div>Investigación
     </a>
-    <a class="sb-nav" href="diseno.html">
+    <a class="sb-nav" href="diseno.html" target="_blank">
       <div class="sb-nav-dot"></div>Diseño
     </a>
-    <a class="sb-nav" href="presentacion.html">
+    <a class="sb-nav" href="presentacion.html" target="_blank">
       <div class="sb-nav-dot"></div>Presentación
     </a>
   </div>
@@ -115,26 +115,21 @@
     </div>
   </div>
 
-  <!-- SUBTEMAS -->
+  <!-- OBJETIVOS -->
   <div class="sec">
-    <div class="sec-title">Subtemas</div>
+    <div class="sec-title">Objetivos</div>
     <div class="sub-row">
       <div class="sub-card">
-        <div class="sub-num">Subtema 01</div>
-        <div class="sub-h">El proceso de toma de decisiones empresariales</div>
-        <ul class="sub-list">
-          <li>¿Qué es una decisión empresarial?</li>
-          <li>Pasos del proceso</li>
-          <li>Tipos de decisiones (programadas / no programadas)</li>
-        </ul>
+        <div class="sub-num">Objetivo 01</div>
+        <div class="sub-h">Identificar el proceso de toma de decisiones empresariales</div>
       </div>
       <div class="sub-card">
-        <div class="sub-num">Subtema 02</div>
-        <div class="sub-h">Factores fundamentales para la toma de decisiones</div>
+        <div class="sub-num">Objetivo 02</div>
+        <div class="sub-h">Describir los factores fundamentales para la toma de decisiones</div>
         <ul class="sub-list">
-          <li>Conocimiento de datos y análisis de información</li>
-          <li>Identificar la toma de decisiones en el liderazgo</li>
-          <li>Fases de la toma de decisiones en el liderazgo</li>
+          <li>Conocimiento de los datos y análisis de la información</li>
+          <li>Identificar la Toma de Decisiones en el ejercicio del Liderazgo</li>
+          <li>Enlistar las Fases de la Toma de Decisiones en el ejercicio del Liderazgo</li>
         </ul>
       </div>
     </div>
@@ -173,7 +168,7 @@ const STATUS_LABELS = { sin_iniciar:'Sin iniciar', en_progreso:'En progreso', li
 const ovGrid = document.getElementById('ov-grid');
 Object.entries(EQUIPOS).forEach(([id, eq]) => {
   const card = document.createElement('a');
-  card.className = 'ov-card'; card.href = eq.href;
+  card.className = 'ov-card'; card.href = eq.href; card.target = '_blank';
   card.innerHTML = `
     <div class="ov-card-top">
       <span class="ov-name">${eq.label}</span>
