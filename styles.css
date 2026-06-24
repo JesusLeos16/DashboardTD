@@ -162,9 +162,15 @@ hr.sb-div { border: none; border-top: 1px solid var(--g4); margin: .6rem 0; }
 .feed-author { font-size: .7rem; font-weight: 700; color: var(--eq-color); }
 .feed-time { font-size: .64rem; color: var(--g3); }
 .feed-txt { font-size: .82rem; color: var(--g1); line-height: 1.5; white-space: pre-wrap; word-break: break-word; }
-.feed-form { padding-top: .75rem; border-top: 1px solid var(--g4); display: flex; gap: .5rem; flex-shrink: 0; }
+.feed-form { padding-top: .75rem; border-top: 1px solid var(--g4); flex-shrink: 0; }
+.feed-fields { display: flex; flex-direction: column; gap: .4rem; }
+.feed-row { display: flex; gap: .4rem; align-items: flex-start; }
+.feed-field { flex: 1; min-width: 0; padding: .38rem .6rem; border: 1px solid var(--g4); border-radius: 6px; font-family: inherit; font-size: .78rem; outline: none; background: var(--white); color: var(--black); }
+.feed-field:focus { border-color: var(--eq-color); }
+.feed-field[type="date"], .feed-field[type="time"] { flex: 0 0 auto; }
 .feed-inp { flex: 1; padding: .42rem .6rem; border: 1px solid var(--g4); border-radius: 6px; font-family: inherit; font-size: .78rem; resize: none; outline: none; }
 .feed-inp:focus { border-color: var(--eq-color); }
+.feed-when { font-size: .64rem; color: var(--g3); }
 
 /* ── FILES ── */
 .file-wrap { display: flex; flex-direction: column; height: calc(100vh - 340px); min-height: 280px; }

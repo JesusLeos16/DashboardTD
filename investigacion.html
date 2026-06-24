@@ -119,8 +119,17 @@
     <div class="feed-wrap">
       <div class="feed-list" id="feed-list"><div class="feed-empty">Sin actualizaciones aún.</div></div>
       <div class="feed-form">
-        <textarea class="feed-inp" id="feed-inp" rows="2" placeholder="Escribe una actualización…" maxlength="500"></textarea>
-        <button class="grn-btn" id="feed-btn">Enviar</button>
+        <div class="feed-fields">
+          <div class="feed-row">
+            <input class="feed-field" id="feed-nombre" type="text" placeholder="Nombre" maxlength="40" />
+            <input class="feed-field" id="feed-fecha" type="date" />
+            <input class="feed-field" id="feed-hora" type="time" />
+          </div>
+          <div class="feed-row">
+            <textarea class="feed-inp" id="feed-inp" rows="2" placeholder="Comentario…" maxlength="500"></textarea>
+            <button class="grn-btn" id="feed-btn">Enviar</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -231,16 +240,22 @@ document.querySelectorAll('.task-row').forEach(row => {
 const feedList = document.getElementById('feed-list');
 const feedInp  = document.getElementById('feed-inp');
 const feedBtn  = document.getElementById('feed-btn');
+const feedNombre = document.getElementById('feed-nombre');
+const feedFecha  = document.getElementById('feed-fecha');
+const feedHora   = document.getElementById('feed-hora');
+feedNombre.value = localStorage.getItem('td-user') || '';
+const _n = new Date(); feedFecha.value = _n.toISOString().split('T')[0]; feedHora.value = _n.toTimeString().slice(0,5);
+nameEl.addEventListener('change', () => { feedNombre.value = nameEl.value.trim(); });
 onSnapshot(collection(db,'equipos',EQ_ID,'feed'), snap => {
   const items = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(a.timestamp?.seconds||0)-(b.timestamp?.seconds||0));
   if(!items.length){feedList.innerHTML='<div class="feed-empty">Sin actualizaciones aún.</div>';return;}
-  feedList.innerHTML=items.map(a=>`<div class="feed-entry"><div class="feed-meta"><span class="feed-author">${a.autor||'Anónimo'}</span><span class="feed-time">${fmtTime(a.timestamp?.seconds)}</span></div><div class="feed-txt">${esc(a.texto||'')}</div></div>`).join('');
+  feedList.innerHTML=items.map(a=>`<div class="feed-entry"><div class="feed-meta"><span class="feed-author">${esc(a.nombre||a.autor||'Anónimo')}</span><span class="feed-when">${fmtDate(a.fecha,a.hora)}</span></div><div class="feed-txt">${esc(a.texto||'')}</div></div>`).join('');
   feedList.scrollTop=feedList.scrollHeight;
 });
 feedBtn.addEventListener('click',async()=>{
   const txt=feedInp.value.trim();if(!txt)return;
-  await addDoc(collection(db,'equipos',EQ_ID,'feed'),{texto:txt,autor:getUser(),timestamp:serverTimestamp()});
-  feedInp.value='';
+  await addDoc(collection(db,'equipos',EQ_ID,'feed'),{nombre:feedNombre.value.trim()||getUser(),fecha:feedFecha.value,hora:feedHora.value,texto:txt,timestamp:serverTimestamp()});
+  feedInp.value='';const now=new Date();feedFecha.value=now.toISOString().split('T')[0];feedHora.value=now.toTimeString().slice(0,5);
 });
 feedInp.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();feedBtn.click();}});
 
@@ -320,6 +335,7 @@ lkBtn.addEventListener('click',async()=>{
 lkInp.addEventListener('keydown',e=>{if(e.key==='Enter')lkBtn.click();});
 
 function fmtTime(sec){if(!sec)return'';return new Date(sec*1000).toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'});}
+function fmtDate(fecha,hora){if(!fecha)return'';const[y,m,d]=fecha.split('-');return`${d}/${m}/${y}${hora?' '+hora:''}`;}
 function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 </script>
 </body>
